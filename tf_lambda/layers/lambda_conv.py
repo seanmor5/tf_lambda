@@ -1,4 +1,5 @@
-from tf_lambda.layer import LambdaLayer
+from tf_lambda.layers.lambda_layer import LambdaLayer
+from tensorflow.keras.layers import Layer
 
 class LambdaConv(Layer):
 

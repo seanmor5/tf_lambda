@@ -4,13 +4,14 @@ This is a TensorFlow 2 implementation of a Lambda Layer from: [LambdaNetworks: M
 
 ## Usage
 
-### Global Context
+### Lambda Layer
+
+Global Context
 
 ```python
 import tensorflow as tf
 
 layer = LambdaLayer(
-    dim = 32,       # channels going in
     dim_out = 32,   # channels out
     n = 64 * 64,    # number of input pixels (64 x 64 image)
     dim_k = 16,     # key dimension
@@ -22,17 +23,26 @@ x = tf.random.normal(shape=(1, 64, 64, 32))
 layer(x)
 ```
 
-### Local Context
+Localized Context
 
 ```python
 layer = LambdaLayer(
-    dim = 32,
     dim_out = 32,
     r = 23,         # the receptive field for relative positional encoding (23 x 23)
     dim_k = 16,
     heads = 4,
     dim_u = 4
 )
+
+x = tf.random.normal(shape=(1, 64, 64, 32))
+layer(x)
+```
+### Lambda Conv
+
+Just a wrapper around the Lambda Layer. Builds it specifically for image data.
+
+```python
+layer = LambdaConv(channels_out = 32)
 
 x = tf.random.normal(shape=(1, 64, 64, 32))
 layer(x)

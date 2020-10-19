@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tf-lambda",
-    version="0.1.1",
+    version="0.3.0",
     author="Sean Moriarity",
     author_email="smoriarity.5@gmail.com",
     description="A TensorFlow 2 implementation of LambdaNetworks.",
@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/seanmor5/tf_lambda",
     packages=setuptools.find_packages(),
+    install_requires=[
+      'einops'
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
