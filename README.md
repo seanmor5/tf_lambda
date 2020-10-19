@@ -10,6 +10,7 @@ Global Context
 
 ```python
 import tensorflow as tf
+from tf_lambda.layers.lambda_layer import LambdaLayer
 
 layer = LambdaLayer(
     dim_out = 32,   # channels out
@@ -42,6 +43,8 @@ layer(x)
 Just a wrapper around the Lambda Layer. Builds it specifically for image data.
 
 ```python
+from tf_lambda.layers.lambda_conv import LambdaConv
+
 layer = LambdaConv(channels_out = 32)
 
 x = tf.random.normal(shape=(1, 64, 64, 32))
