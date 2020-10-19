@@ -25,8 +25,8 @@ class LambdaLayer(Layer):
 
     if self.local_contexts:
       assert (r % 2) == 1, 'Receptive kernel size should be odd.'
-      self.padding = r // 2
-      self.R = Conv3D(filters = (self.dim_k, self.dim_u), kernel_size = (1, r, r), padding = (0, self.padding, self.padding))
+      self.pad_fn = lambda x: tf.pad(x, tf.constant([[0, 0], [r // 2, r // 2], [r // 2, r // 2], [0, 0]]))
+      self.pos_conv = Conv3D(filters = dim_k, kernel_size = (1, r, r))
       self.flatten = tf.keras.layers.Flatten()
     else:
       assert n is not None, 'You must specify the total sequence length (h x w)'
@@ -54,14 +54,17 @@ class LambdaLayer(Layer):
     Y_c = einsum('b h n k, b k v -> b n h v', q, lambda_c)
 
     if self.local_contexts:
-      v = rearrange(v, 'b u v (hh ww) -> b u v hh ww', hh = hh, ww = ww)
-      lambda_p = self.R(v)
-      Y_p = einsum('b h k n, b k v n -> b n h v', q, self.flatten(lambda_p))
+      v = rearrange(v, 'b u (hh ww) v -> b v hh ww u', hh = hh, ww = ww)
+      # We need to add explicit padding across the batch dimension
+      lambda_p = tf.map_fn(self.pad_fn, v)
+      lambda_p = self.pos_conv(lambda_p)
+      lambda_p = tf.reshape(lambda_p, (lambda_p.shape[0], lambda_p.shape[1], lambda_p.shape[2] * lambda_p.shape[3], lambda_p.shape[4]))
+      Y_p = einsum('b h n k, b v n k -> b n h v', q, lambda_p)
     else:
       lambda_p = einsum('n m k u, b u m v -> b n k v', self.pos_emb, v)
       Y_p = einsum('b h n k, b n k v -> b n h v', q, lambda_p)
 
     Y = Y_c + Y_p
-    out = rearrange(Y, 'b (hh ww) h v -> b (h v) hh ww', hh = hh, ww = ww)
+    out = rearrange(Y, 'b (hh ww) h v -> b hh ww (h v)', hh = hh, ww = ww)
 
     return out

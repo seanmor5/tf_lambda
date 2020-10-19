@@ -4,6 +4,8 @@ This is a TensorFlow 2 implementation of a Lambda Layer from: [LambdaNetworks: M
 
 ## Usage
 
+### Global Context
+
 ```python
 import tensorflow as tf
 
@@ -14,6 +16,22 @@ layer = LambdaLayer(
     dim_k = 16,     # key dimension
     heads = 4,      # number of heads, for multi-query
     dim_u = 1       # 'intra-depth' dimension
+)
+
+x = tf.random.normal(shape=(1, 64, 64, 32))
+layer(x)
+```
+
+### Local Context
+
+```python
+layer = LambdaLayer(
+    dim = 32,
+    dim_out = 32,
+    r = 23,         # the receptive field for relative positional encoding (23 x 23)
+    dim_k = 16,
+    heads = 4,
+    dim_u = 4
 )
 
 x = tf.random.normal(shape=(1, 64, 64, 32))
