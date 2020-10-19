@@ -1,6 +1,6 @@
 # Lambda Networks
 
-This is an implementation of a Lambda Layer from: [LambdaNetworks: Modeling Long-Range Interactions Without Attention](https://openreview.net/pdf?id=xTJEN-ggl1b). LambdaNetworks achieve SOTA on ImageNet. For now, this library provides a basic UNTESTED version of the Lambda Layer based off of this [repository](https://github.com/lucidrains/lambda-networks).
+This is a TensorFlow 2 implementation of a Lambda Layer from: [LambdaNetworks: Modeling Long-Range Interactions Without Attention](https://openreview.net/pdf?id=xTJEN-ggl1b). LambdaNetworks achieve SOTA on ImageNet. For now, this library provides a basic UNTESTED version of the Lambda Layer based off of this [repository](https://github.com/lucidrains/lambda-networks).
 
 ## Usage
 
