@@ -5,7 +5,7 @@ from einops import rearrange
 
 class LambdaLayer(Layer):
 
-  def __init__(self, dim, *, dim_k, n = None, r = None, heads = 4, dim_out = None, dim_u = 1):
+  def __init__(self, *, dim_k, n = None, r = None, heads = 4, dim_out = None, dim_u = 1):
     super(LambdaLayer, self).__init__()
 
     self.u = dim_u

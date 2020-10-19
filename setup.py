@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="tf-lambda-seanmor5",
-    version="0.1.0",
+    name="tf-lambda",
+    version="0.1.1",
     author="Sean Moriarity",
     author_email="smoriarity.5@gmail.com",
     description="A TensorFlow 2 implementation of LambdaNetworks.",
