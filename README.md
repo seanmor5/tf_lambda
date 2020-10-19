@@ -40,12 +40,12 @@ layer(x)
 ```
 ### Lambda Conv
 
-Just a wrapper around the Lambda Layer. Builds it specifically for image data.
+Just a wrapper around the Lambda Layer. Builds it specifically for image data. The only thing you need to specify is the number of channels to output.
 
 ```python
 from tf_lambda.layers.lambda_conv import LambdaConv
 
-layer = LambdaConv(channels_out = 32)
+layer = LambdaConv(32)
 
 x = tf.random.normal(shape=(1, 64, 64, 32))
 layer(x)

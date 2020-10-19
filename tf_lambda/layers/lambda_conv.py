@@ -3,7 +3,7 @@ from tensorflow.keras.layers import Layer
 
 class LambdaConv(Layer):
 
-  def __init__(self, *, channels_out = None, receptive_field = None, key_dim = 16, intra_depth_dim = 1, heads = 4):
+  def __init__(self, channels_out, *, receptive_field = None, key_dim = 16, intra_depth_dim = 1, heads = 4):
     super(LambdaConv, self).__init__()
     self.channels_out = channels_out
     self.receptive_field = receptive_field
