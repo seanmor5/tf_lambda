@@ -1,8 +1,0 @@
-README.md
-setup.py
-tf_lambda/__init__.py
-tf_lambda/lambda_layer.py
-tf_lambda.egg-info/PKG-INFO
-tf_lambda.egg-info/SOURCES.txt
-tf_lambda.egg-info/dependency_links.txt
-tf_lambda.egg-info/top_level.txt
